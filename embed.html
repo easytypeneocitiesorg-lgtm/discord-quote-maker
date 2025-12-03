@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Discord Quote</title>
+
+  <!-- Open Graph metadata for Discord -->
+  <meta property="og:title" content="Custom Discord Quote">
+  <meta property="og:description" content="A quote generated from my website">
+  <meta property="og:image" content="">
+  <meta property="og:type" content="website">
+
+  <script>
+    // Get query parameters from URL
+    const params = new URLSearchParams(window.location.search);
+    const username = params.get("username") || "User";
+    const avatar = params.get("avatar") || "";
+    const text = params.get("text") || "Your quote here";
+
+    // Set og:image dynamically
+    const ogImage = `/api/quote?username=${encodeURIComponent(username)}&text=${encodeURIComponent(text)}${avatar ? `&avatar=${encodeURIComponent(avatar)}` : ''}`;
+    document.querySelector('meta[property="og:image"]').setAttribute("content", window.location.origin + ogImage);
+
+    // Redirect to show the image on page
+    window.location.href = ogImage;
+  </script>
+</head>
+<body>
+  <p>If you see this page, your browser does not support automatic redirect.</p>
+  <img id="quoteImage" src="" alt="Quote Image"/>
+</body>
+</html>
