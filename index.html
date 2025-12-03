@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Discord Quote Generator</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+    input, button { padding: 10px; margin: 5px; width: 300px; }
+    img { margin-top: 20px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Discord Quote Generator</h1>
+  <input id="username" placeholder="Username" /><br/>
+  <input id="avatar" placeholder="Avatar URL" /><br/>
+  <input id="quote" placeholder="Quote" /><br/>
+  <button onclick="generate()">Generate Quote</button>
+  <div id="result"></div>
+
+  <script>
+    function generate() {
+      const username = encodeURIComponent(document.getElementById('username').value);
+      const avatar = encodeURIComponent(document.getElementById('avatar').value);
+      const quote = encodeURIComponent(document.getElementById('quote').value);
+      const url = `/api/quote?username=${username}&avatar=${avatar}&text=${quote}`;
+      document.getElementById('result').innerHTML = `<img src="${url}" />`;
+    }
+  </script>
+</body>
+</html>
