@@ -31,16 +31,16 @@
         return;
       }
 
-      // Build API URL
-      let url = `${window.location.origin}/api/quote?username=${username}&text=${quote}`;
-      if (avatar) url += `&avatar=${avatar}`;
+      // Show generated image on site
+      let imageUrl = `/api/quote?username=${username}&text=${quote}`;
+      if (avatar) imageUrl += `&avatar=${avatar}`;
+      document.getElementById('result').innerHTML = `<img src="${imageUrl}" />`;
 
-      // Display image on site
-      document.getElementById('result').innerHTML = `<img src="${url}" />`;
-
-      // Show direct URL for Discord
+      // Discord-ready link via embed.html
+      let embedUrl = `/embed.html?username=${username}&text=${quote}`;
+      if (avatar) embedUrl += `&avatar=${avatar}`;
       const linkEl = document.getElementById('link');
-      linkEl.href = url;
+      linkEl.href = embedUrl;
       linkEl.textContent = "Click or copy this link to embed in Discord";
     }
   </script>
