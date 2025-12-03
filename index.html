@@ -6,24 +6,42 @@
   <style>
     body { font-family: sans-serif; text-align: center; margin-top: 50px; }
     input, button { padding: 10px; margin: 5px; width: 300px; }
-    img { margin-top: 20px; border-radius: 8px; }
+    img { margin-top: 20px; border-radius: 8px; max-width: 90%; height: auto; }
+    #link { margin-top: 10px; display: block; word-break: break-all; }
   </style>
 </head>
 <body>
   <h1>Discord Quote Generator</h1>
   <input id="username" placeholder="Username" /><br/>
-  <input id="avatar" placeholder="Avatar URL" /><br/>
+  <input id="avatar" placeholder="Avatar URL (optional)" /><br/>
   <input id="quote" placeholder="Quote" /><br/>
   <button onclick="generate()">Generate Quote</button>
+
   <div id="result"></div>
+  <a id="link" href="#" target="_blank"></a>
 
   <script>
     function generate() {
       const username = encodeURIComponent(document.getElementById('username').value);
       const avatar = encodeURIComponent(document.getElementById('avatar').value);
       const quote = encodeURIComponent(document.getElementById('quote').value);
-      const url = `/api/quote?username=${username}&avatar=${avatar}&text=${quote}`;
+
+      if (!username || !quote) {
+        alert("Username and quote are required!");
+        return;
+      }
+
+      // Build API URL
+      let url = `${window.location.origin}/api/quote?username=${username}&text=${quote}`;
+      if (avatar) url += `&avatar=${avatar}`;
+
+      // Display image on site
       document.getElementById('result').innerHTML = `<img src="${url}" />`;
+
+      // Show direct URL for Discord
+      const linkEl = document.getElementById('link');
+      linkEl.href = url;
+      linkEl.textContent = "Click or copy this link to embed in Discord";
     }
   </script>
 </body>
