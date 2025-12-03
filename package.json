@@ -6,6 +6,6 @@
     "start": "vercel dev"
   },
   "dependencies": {
-    "canvas": "^2.12.0"
+    "canvas": "^3.2.0"
   }
 }
