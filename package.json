@@ -1,0 +1,11 @@
+{
+  "name": "discord-quote",
+  "version": "1.0.0",
+  "main": "api/quote.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "canvas": "^2.12.0"
+  }
+}
